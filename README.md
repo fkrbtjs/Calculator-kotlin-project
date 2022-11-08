@@ -14,7 +14,7 @@
 | OS | Windows 10 home |
 | Language | Kotlin |
 | Editor | Android Studio Dolphin |
-| Github | https://github.com/fkrbtjs/calculator |
+| Github | https://github.com/fkrbtjs/Calculator-kotlin-project |
 
 ## 개발기간
 
