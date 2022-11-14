@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import aop.part3.calc.databinding.ItemCalcresultBinding
 
-
 class CustomAdapter(val dataList:MutableList<DataVO>, val parentContext: Context): RecyclerView.Adapter<CustomAdapter.CustomViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -19,6 +18,7 @@ class CustomAdapter(val dataList:MutableList<DataVO>, val parentContext: Context
         val data = dataList.get(position)
         binding.tvCalculate.text = data.value
         binding.tvRes.text=data.result
+        
         customViewHolder.itemView.setOnLongClickListener {
             val dataVO:DataVO = dataList.get(position)
             (parentContext as MainActivity).refreshRecyclerViewDrop(dataVO)
