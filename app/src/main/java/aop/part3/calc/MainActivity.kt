@@ -17,22 +17,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         dataList = mutableListOf<DataVO>()
-
-
         val layoutManager: LinearLayoutManager = selectLayoutManager(1)
-
+        var value: Any = 0
+        var result :Any = 0
+        var calc = ""
+        
         customAdapter = CustomAdapter(dataList, this)
         binding.recyclerview.layoutManager = layoutManager
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.adapter = customAdapter
-
-
-
-        var value: Any = 0
-        var result :Any = 0
-        var calc = ""
-
-
         binding.tv0.setOnClickListener { binding.tvCalc.append("0") }
         binding.tv1.setOnClickListener { binding.tvCalc.append("1") }
         binding.tv2.setOnClickListener { binding.tvCalc.append("2") }
@@ -45,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.tv9.setOnClickListener { binding.tvCalc.append("9") }
         binding.tvDot.setOnClickListener { binding.tvCalc.append(".") }
         binding.tvBack.setOnClickListener { binding.tvCalc.setText(binding.tvCalc.text.dropLast(1)) }
-
+        
         binding.tvCancle.setOnClickListener {
             binding.tvCalc.setText("")
             binding.tvResult.setText("")
@@ -57,7 +50,6 @@ class MainActivity : AppCompatActivity() {
             value = binding.tvCalc.text.toString().toDouble()
             binding.tvCalc.setText("")
             binding.tvResult.setText(value.toString())
-
         }
 
         binding.tvMinus.setOnClickListener {
@@ -65,60 +57,53 @@ class MainActivity : AppCompatActivity() {
             value = binding.tvCalc.text.toString().toDouble()
             binding.tvCalc.setText("")
             binding.tvResult.setText(value.toString())
-
         }
+        
         binding.tvMultiply.setOnClickListener {
             calc = "multiply"
             value = binding.tvCalc.text.toString().toDouble()
             binding.tvCalc.setText("")
             binding.tvResult.setText(value.toString())
-
         }
+        
         binding.tvDevide.setOnClickListener {
             calc = "devide"
             value = binding.tvCalc.text.toString().toDouble()
             binding.tvCalc.setText("")
             binding.tvResult.setText(value.toString())
-
         }
-
-
-
 
         binding.tvEqual.setOnClickListener {
             when (calc) {
                 "plus" -> {
                     result =
-                        binding.tvResult.text.toString().toDouble() + binding.tvCalc.text.toString()
-                            .toDouble()
+                        binding.tvResult.text.toString().toDouble() + binding.tvCalc.text.toString().toDouble()
                     var dataVO :DataVO = DataVO("${binding.tvResult.text} + ${binding.tvCalc.text}","= ${result}")
                     refreshRecyclerView(dataVO)
                 }
                 "minus" -> {
                     result =
-                        binding.tvResult.text.toString().toDouble() - binding.tvCalc.text.toString()
-                            .toDouble()
+                        binding.tvResult.text.toString().toDouble() - binding.tvCalc.text.toString().toDouble()
                     var dataVO :DataVO = DataVO("${binding.tvResult.text} - ${binding.tvCalc.text}","= ${result}")
                     refreshRecyclerView(dataVO)
                 }
                 "multiply" -> {
                     result =
-                        binding.tvResult.text.toString().toDouble() * binding.tvCalc.text.toString()
-                            .toDouble()
+                        binding.tvResult.text.toString().toDouble() * binding.tvCalc.text.toString().toDouble()
                     var dataVO :DataVO = DataVO("${binding.tvResult.text} x ${binding.tvCalc.text}","= ${result}")
                     refreshRecyclerView(dataVO)
                 }
                 "devide" -> {
                     result =
-                        binding.tvResult.text.toString().toDouble() / binding.tvCalc.text.toString()
-                            .toDouble()
+                        binding.tvResult.text.toString().toDouble() / binding.tvCalc.text.toString().toDouble()
                     var dataVO :DataVO = DataVO("${binding.tvResult.text} / ${binding.tvCalc.text}","= ${result}")
                     refreshRecyclerView(dataVO)
                 }
-
-            }
+            }  
+            
             binding.tvResult.setText(result.toString())
             binding.tvCalc.setText(result.toString())
+            
         }
 
         binding.tvHistory.setOnClickListener {
@@ -128,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnOut.setOnClickListener {
             binding.lnHisotry.visibility = View.GONE
         }
-
+        
     }
 
     private fun selectLayoutManager(i: Int): LinearLayoutManager {
@@ -139,7 +124,6 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this)
             layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         }
-
         return layoutManager
     }
 
@@ -151,6 +135,5 @@ class MainActivity : AppCompatActivity() {
     public fun refreshRecyclerViewDrop(dataVO: DataVO) {
         dataList.remove(dataVO)
         customAdapter.notifyDataSetChanged()
-
     }
 }
